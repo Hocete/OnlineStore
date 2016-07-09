@@ -1,0 +1,26 @@
+﻿@model OnlineStore.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading"><h3>登陆</h3></div>
+    <div class="panel-body">
+        <p class="lead">请输入您的账号密码</p>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label>用户名</label>
+                @Html.TextBoxFor(m=>m.UserName,new { @class="form-control"})
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control",type="password" })
+            </div>
+            <input type="submit" value="登陆" class="btn btn-primary"/>
+        }
+    </div>
+</div>

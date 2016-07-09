@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OnlineStore.Domain.Entities.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-info">
+<div class="panel page-header">
+    <h3>全部商品</h3>
+</div>
+ <div class="panel-body">
+     <table class="table table-stripe table-condensed table-bordered">
+         <tr>
+             <th>
+                 @Html.DisplayNameFor(model => model.Name)
+             </th>
+             <th>
+                 @Html.DisplayNameFor(model => model.Price)
+             </th>
+             <th></th>
+         </tr>
+
+         @foreach (var item in Model)
+         {
+             <tr>
+                 <td>
+                     @Html.ActionLink(item.Name, "Edit", new { item.ProductID })
+                 </td>
+                 <td>
+                     @item.Price.ToString("c")
+                 </td>
+                 <td>
+                     @using (Html.BeginForm("Delete", "Admin"))
+                     {
+                         @Html.Hidden("ProductID", item.ProductID)
+                         <input type="submit" class="btn btn-danger btn-sm" value="删除"/>
+                     }
+                 </td>
+             </tr>
+         }
+     </table>
+ </div>
+    <div class="panel-footer text-center">
+       @Html.ActionLink("新增", "Create",null,new { @class="btn btn-info btn-lg"})
+    </div> 
+</div>

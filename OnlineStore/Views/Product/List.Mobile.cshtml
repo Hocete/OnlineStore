@@ -1,0 +1,17 @@
+﻿
+@using OnlineStore.HtmlHelpers
+@model OnlineStore.Models.ProductsListViewModel
+
+@{
+    ViewBag.Title = "列表";
+}
+
+@foreach (var p in Model.Products)
+{
+
+    @Html.Partial("ProductSummary", p)
+}
+<div data-role="controlgroup" data-type="horizontal">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { category = Model.CurrentCategory, page = x }))
+</div>
+

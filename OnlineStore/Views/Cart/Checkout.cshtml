@@ -1,0 +1,36 @@
+﻿@model OnlineStore.Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "商品：结算";
+}
+
+<h2>正在结算</h2>
+<p>请输入您的详细资料，确保我们正常发货！</p>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <h3>Ship to</h3>
+    <div class="form-group">
+        <label>姓名：</label>
+        @Html.TextBoxFor(x => x.Name, new { @class= "form-control" })
+    </div>
+    foreach(var property in ViewData.ModelMetadata.Properties)
+    {
+        if (property.PropertyName != "Name" && property.PropertyName != "GiftWrap")
+        {
+            <div class="form-group">
+                <label>@(property.DisplayName??property.PropertyName)</label>
+                @Html.TextBox(property.PropertyName,null, new { @class = "form-control" })
+            </div>
+        }
+    }
+    <h3>选择</h3>
+    <div class="checkbox">
+        <label>@Html.EditorFor(x=>x.GiftWrap)
+        礼盒包装
+        </label>
+    </div>
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="提交订单"/>
+    </div>
+}
